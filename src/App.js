@@ -22,23 +22,24 @@ function GitHubUser ({ name, location, avatar_url}) {
 
 function App() {
   const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(null);
 
   useEffect(() => {
+    setLoading(true);
     fetch(`https://api.github.com/users/RMompati`)
         .then((response) => response.json())
-        .then(setData);
+        .then(setData)
+        .then(() => setLoading(false))
+        .catch(setError);
   }, []);
 
-
+  if (loading) return <h1 className="App">Loading...</h1>
+  if (error) return <pre>{JSON.stringify(error)}</pre>
   return (
     <div>
       <h1 className="App">Github API Data</h1>
-
-      {
-        data
-            ? <GitHubUser {...data}/>
-            : <h5>No data</h5>
-      }
+      { data ? <GitHubUser {...data}/> : <h2>No data...</h2> }
     </div>
   );
 }
