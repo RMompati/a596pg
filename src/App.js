@@ -9,6 +9,17 @@ function useInput(initialValue = "") {
   ];
 }
 
+function GitHubUser ({ name, location, avatar_url}) {
+  return (
+      <div className="App">
+        <h2>{name}</h2>
+        <hr style={{width: "25%"}}/>
+        <p>Based in: {location}</p>
+        <img src={avatar_url} height={200} alt={"Github Avatar"}/>
+      </div>
+  );
+}
+
 function App() {
   const [data, setData] = useState(null);
 
@@ -23,7 +34,11 @@ function App() {
     <div>
       <h1 className="App">Github API Data</h1>
 
-      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <h5>No data</h5>}
+      {
+        data
+            ? <GitHubUser {...data}/>
+            : <h5>No data</h5>
+      }
     </div>
   );
 }
