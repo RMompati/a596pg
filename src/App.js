@@ -1,29 +1,30 @@
 import './App.css';
-import { useRef } from "react";
+import { useState } from "react";
 
 function App() {
 
-  const txtTitle = useRef();
-  const hexColor = useRef();
+  const [title, setTitle] = useState("");
+  const [color, setColor] = useState("#000000");
 
-  console.log(txtTitle)
-  console.log(hexColor)
   const submit = (e) => {
     e.preventDefault();
-
-    const title = txtTitle.current.value;
-    const color = hexColor.current.value;
-
     alert(`${title}, ${color}`);
-
-    txtTitle.current.value = "";
-    hexColor.current.value = "";
+    setTitle("");
+    setColor("#000000")
   };
   return (
     <div className="App">
       <form onSubmit={submit}>
-        <input ref={txtTitle} className="App-Input" type="text" placeholder="color title..."/>
-        <input ref={hexColor} type="color"/>
+        <input value={title}
+               className="App-Input"
+               type="text"
+               placeholder="color title..."
+               onChange={(e) => setTitle(e.target.value)}
+        />
+        <input value={color}
+               type="color"
+               onChange={(e) => setColor(e.target.value)}
+        />
         <br/>
         <button className="App-Button">Add</button>
       </form>
