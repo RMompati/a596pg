@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.App-Button {
+  min-width: 128px;
+  min-height: 32px;
+}
