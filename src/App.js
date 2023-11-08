@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function useInput(initialValue = "") {
   const [value, setValue] = useState(initialValue);
@@ -10,30 +10,20 @@ function useInput(initialValue = "") {
 }
 
 function App() {
+  const [data, setData] = useState(null);
 
-  const [titleProps, resetTitle] = useInput("");
-  const [colorProps, resetColor] = useInput("#000000");
+  useEffect(() => {
+    fetch(`https://api.github.com/users/RMompati`)
+        .then((response) => response.json())
+        .then(setData);
+  }, []);
 
-  const submit = (e) => {
-    e.preventDefault();
-    alert(`${titleProps.value}, ${colorProps.value}`);
-    resetTitle();
-    resetColor()
-  };
+
   return (
-    <div className="App">
-      <form onSubmit={submit}>
-        <input {...titleProps}
-               className="App-Input"
-               type="text"
-               placeholder="color title..."
-        />
-        <input {...colorProps}
-               type="color"
-        />
-        <br/>
-        <button className="App-Button">Add</button>
-      </form>
+    <div>
+      <h1 className="App">Github API Data</h1>
+
+      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : <h5>No data</h5>}
     </div>
   );
 }
