@@ -1,37 +1,31 @@
 import './App.css';
 
-const peaks = [
-  { name: "Freel", elevation: 10891},
-  { name: "Monument", elevation: 10067},
-  { name: "Pyramid", elevation: 9983},
-  { name: "Tallac", elevation: 9735},
-];
-
-function List({data, renderItem, renderEmpty}) {
-  return !data.length ? renderEmpty
-      :(
-          <ul>
-            {
-              data.map((item) => (
-                  <li key={item.name}>{renderItem(item)}</li>
-              ))
-            }
-          </ul>
-      );
-}
-
-function App() {
-  /** This <> ... </> is a shorthand for <React.Fragment /> */
+function Home() {
   return (
-      <List data={peaks}
-            renderEmpty={<p>This list is empty</p>}
-            renderItem={item => (
-                <>
-                  {item.name} - {item.elevation} ft.
-                </>
-            )}
-      />
+      <div>
+        <h1>My Website</h1>
+      </div>
   );
 }
 
-export default App;
+export function Contact() {
+  return (
+      <div>
+        <h1>Contact Us</h1>
+      </div>
+  );
+}
+
+export function About() {
+  return (
+      <div>
+        <h1>About Us</h1>
+      </div>
+  );
+}
+
+export function App() {
+  return (
+      <Home />
+  );
+}
